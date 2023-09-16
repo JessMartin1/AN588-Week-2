@@ -48,7 +48,6 @@ v[seq(from = 1, to = 100, by = 2)]
 First, create a vector of 1, word character strings comprising the first line of the novel Ulysses, by James Joyce: “Stately, plump Buck Mulligan came from the stairhead, bearing a bowl of lather on which a mirror and a razor lay crossed.”
 
 Then, extract every third element of this vector.
-
 ```{r challenge 1}
 v1<- c('Stately',',', 'plump', 'Buck', 'Mulligan', 'came', 'from', 'the', 'stairhead', ', ', 'bearing', 'a', 'bowl', 'of', 'lather', 'on', 'which', 'a', 'mirror', 'and', 'a', 'razor', 'lay', 'crossed', '.'); v1 
 
@@ -76,6 +75,8 @@ m <- matrix(data = 1:80, nrow = 8, ncol = 10, byrow = FALSE)
 m
 x <- m[4, 5]
 x
+```
+```{r}
 ##Challenge 2
 ##-Given the matrix, m, above, extract the 2nd, 3rd, and 6th columns and assign them to the variable x
 ##-Given the matrix, m, above, extract the 6th to 8th row and assign them to the variable x
@@ -88,7 +89,7 @@ x <- c(m[6, ], m[8, ])
 x
 x <- c(m[2, ], m[6, 2], m[, 9])
 x
-
+```
 ##Challenge 3
 ##Construct a 4-dimensional, 400 element array (5 x 5 x 4 x 4) named a consisting of the numbers 400 to 1 (i.e., a descending series)
 ##Given this matrix, what would the following return?
@@ -96,13 +97,15 @@ x
 ##-a[2, 3, 2,]
 ##-a[1:5, 1:5, 3, 3]
 
-##{r challenge 3}
+```{r challenge 3}
 a <- array(data = 400:1, dim = c(5, 5, 4, 4))
 a
 a[1, 1, 1, 2]
 a[2, 3, 2,]
 a[1:5, 1:5, 3, 3]
+```
 
+```{r setup}
 ##Overwriting
 ##You can replace elements in a vector or matrix, or even entire rows or columns, by identifying the elements to be replaced and then assigning them new values.
 ##Starting with the matrix, m, defined above, what will be the effects of operations below? Pay careful attention to row and column index values, vector recycling, and automated conversion/recasting among data classes.
@@ -143,7 +146,7 @@ names(l)
 l$string  # this is calling the element named 'string' in list 'l'
 
 l$matrix[3, 5]  # this is calling the entry in row 3, column 5 of the element named 'matrix' in list 'l'
-
+```
 ##Challenge 4
 ##Create a list representing this (simplified) primate taxonomy:
 #Primates
@@ -171,6 +174,7 @@ l$matrix[3, 5]  # this is calling the entry in row 3, column 5 of the element na
 #Daubentoniidae
 #HINT: you can use lists as elements in a list, which would nest the names like in a phylogeny.
 #I’ll get you started with the Strepsirhini:
+```{r challenge 3}
 Lemuroidea <- c("Cheirogaleidae", "Lepilemuridae", "Indriidae", "Lemuridae",
     "Daubentoniidae")
 Lorisoidea <- c("Lorisidae", "Galagidae")
@@ -184,7 +188,9 @@ Platyrrhini <- c("Cebidae", "Atelidae", "Pitheciidae")
 Haplorhini <- list(Tarsioidea, Catarrhini, Platyrrhini )
 names(Haplorhini) <- list("Tarsioidea", "Catarrhini", "Platyrrhini")
 Haplorhini
+```
 
+```{r setup}
 ##A data frame is perhaps the most useful (and most familiar) data structure that we can operate with in R as it most closely aligns with how we tend to represent tabular data, with rows as cases or observations and columns as variables describing those observations (e.g., a measurement of a particular type). Variables tend to be measured using the same units and thus fall into the same data class and can be thought of as analogous to vectors.
 ##The data.frame() command can be used to create dataframes from scratch, like this dataframe representing data on some (fictional) BU undergrads:
 
@@ -243,7 +249,7 @@ new_df
 #NA (for not available) is used for missing data. Many statistical functions offer the possibility to include as an argument na.rm=TRUE (“remove NAs”) so that NAs are excluded from a calculation.
 #Inf (and -Inf) is used when the result of a numerical calculation is too extreme for R to express
 #NaN (for not a number) is used when R cannot express the results of a calculation , e.g., when you try to take the square root of a negative number
-
+```
 ##Challenge 5
 #Store the following numbers as a 5 x 3 matrix, called “m3”: 3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2. Be sure to fill the matrix ROW-WISE.
 #Then, do the following:
@@ -251,8 +257,7 @@ new_df
 #As a data frame, coerce the second column to be logical-valued
 #As a data frame, coerce the third column to be factor-valued
 #When you are done, use the str() command to show the data type for each variable in your dataframe.
-
-##{r challenge 5}
+```{r challenge 5}
 v1 <- matrix(data = c(3, 0, 1, 23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2), nrow =  5, ncol = 3)
 m3 <- rbind(v1)
 m3
@@ -272,7 +277,7 @@ str(df)
 ##The file.choose() command is useful and gives you a familiar dialog box to select a file. You can use this to specify the path to a locally-stored file, which you will save as the R object called f.
 ```
 
-```{r}
+```{r setup}
 f <- "CPDS-1960-2014-reduced.txt"
 d <- read.table(f, header = TRUE, sep = "\t", stringsAsFactors = FALSE, fill = T)
 head(d)  # lists the first 6 lines of data
@@ -297,7 +302,7 @@ d <- read_tsv(f, col_names = TRUE)  # for tab-separated files
 head(d)
 class(d)
 ```
-```{r}
+```{r setup}
 #While you should never need to use Excel, sometimes you will no doubt be given a spreadsheet file with some data in it that you want to analyze in R. There are several packages available that provide functions for loading data into R from Excel spreadsheet files: {readxl}, {XLConnect}, {gdata}, and {xlsx}. The first two of these are fast, easy to use, and work well. {gdata} is a bit slower and requires that you have PERL installed someone on your computer (which it is likely to be by default). {xlsx} is much slower.
 
 #NOTE: always use str() to check if your variables come in as the correct data class.
@@ -309,16 +314,29 @@ head(d)
 str(d)
 ```
 
-```{r}
+```{r setup}
 ##We can also load files stored on a server elsewhere on the web, e.g., Dropbox or GitHub.
 #To read .csv or .txt files directly from GitHub, use the {curl} or {readr} packages. We’ll use this extensively in this class, moving forward.
 library(curl)
 f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall23/CPDS-1960-2014-reduced.csv")
 d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
 head(d)
+f <- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall23/CPDS-1960-2014-reduced.txt")
+d <- read.table(f, header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+head(d)
+```
 
+```{r setup}
+Sys.setenv(VROOM_CONNECTION_SIZE = 131072 * 2)
+library(readr)
+f <- "https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall23/CPDS-1960-2014-reduced.csv"
+d <- read_csv(f, col_names = TRUE)
+head(d)
+f <- "https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall23/CPDS-1960-2014-reduced.txt"
+d <- read_tsv(f, col_names = TRUE)
+head(d)
+```
 ## R Markdown
-
 ```{r}
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
